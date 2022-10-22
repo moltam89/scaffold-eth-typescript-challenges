@@ -86,7 +86,8 @@ export const CreateTransactionPage: FC<CreateTransactionPageProps> = (props) => 
     if (!provider) {
       return;
     }
-    const signature = await provider.send("personal_sign", [newHash, address.toLowerCase()]);
+    //const signature = await provider.send("personal_sign", [newHash, address.toLowerCase()]);
+    const signature = await signer.signMessage(ethers.utils.isHexString(newHash) ? ethers.utils.arrayify(newHash) : newHash);
 
     // const signature2 = await signer?.signMessage(newHash);
     // const recover2 = await metaMultiSigWallet.recover(newHash, signature2);
